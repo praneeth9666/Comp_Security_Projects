@@ -1,0 +1,27 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/v7_FWNXP)
+## Install docker
+
+-Ubuntu: https://docs.docker.com/desktop/install/ubuntu/
+    Also need `sudo apt install docker-ce` after those instructions
+-Mac: https://docs.docker.com/desktop/install/mac-install/
+-Windows: https://docs.docker.com/desktop/install/windows-install/
+
+
+## Build docker image
+`docker build -t project4 .`
+
+If you get an error like `permission denied while trying to connect to the Docker daemon`:
+    -add yourself to a docker group: `sudo groupadd docker && sudo usermod -aG docker $USER`
+    -Check the persmission of the docker socket, make sure you can access `sudo chmod 666 /var/run/docker.sock`
+
+
+## Run docker image
+`docker run --privileged -it -v ./:/home/ubuntu/project4 project4`
+
+
+Mac may need to provide: `--platform linux/amd64`
+
+
+
+
+

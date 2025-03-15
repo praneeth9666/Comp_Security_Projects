@@ -1,0 +1,133 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Length Extension Attack Test Case 1
+      id: length-extension-attack-test-case-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Length Extension Attack Test Case 1
+        setup-command: ''
+        command: python3 len_ext_attack.py "https://project1.ecen4133.org/test/lengthextension/api?token=07f32ed614ff75f755c5ab6ac2503767&command=SprinklersPowerOn"
+        input: ''
+        expected-output: https://project1.ecen4133.org/test/lengthextension/api?token=92e9cb4bcc2b25fbde88edb526a3f851&command=SprinklersPowerOn%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%08%01%00%00%00%00%00%00&command=UnlockSafes
+        comparison-method: exact
+        timeout: 10
+    - name: Length Extension Attack Test Case 2
+      id: length-extension-attack-test-case-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Length Extension Attack Test Case 2
+        setup-command: ''
+        command: python3 len_ext_attack.py "https://project1.ecen4133.org/test/lengthextension/api?token=4f30f1d014df9a7aab2ed80e2e9ebd4e&command=ClockPowerOff&command=NoOp&command=ClockPowerOn"
+        input: ''
+        expected-output: https://project1.ecen4133.org/test/lengthextension/api?token=d0c58fabc728166225102eabc15d26bd&command=ClockPowerOff&command=NoOp&command=ClockPowerOn%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%F8%01%00%00%00%00%00%00&command=UnlockSafes
+        comparison-method: exact
+        timeout: 10
+    - name: Hash Collision Attack Test Case 1
+      id: hash-collision-attack-test-case-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Hash Collision Attack Test Case 1
+        setup-command: ''
+        command: python3 good.py
+        input: ''
+        expected-output: Use SHA-256 instead!
+        comparison-method: exact
+        timeout: 10
+    - name: Hash Collision Attack Test Case 2
+      id: hash-collision-attack-test-case-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Hash Collision Attack Test Case 2
+        setup-command: ''
+        command: python3 evil.py
+        input: ''
+        expected-output: MD5 is perfectly secure!
+        comparison-method: exact
+        timeout: 10
+    - name: Hash Collision Attack Test Case 3
+      id: hash-collision-attack-test-case-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Hash Collision Attack Test Case 3
+        setup-command: ''
+        command: '[ "$(openssl dgst -md5 good.py | awk ''{print $2}'')" = "$(openssl
+          dgst -md5 evil.py | awk ''{print $2}'')" ] && echo "The files have the same
+          MD5 hash." || echo "The files have different MD5 hashes."'
+        input: ''
+        expected-output: The files have the same MD5 hash.
+        comparison-method: exact
+        timeout: 10
+    - name: Hash Collision Attack Test Case 4
+      id: hash-collision-attack-test-case-4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Hash Collision Attack Test Case 4
+        setup-command: ''
+        command: '[ "$(openssl dgst -sha256 good.py | awk ''{print $2}'')" = "$(openssl
+          dgst -sha256 evil.py | awk ''{print $2}'')" ] && echo "The files have the
+          same SHA256 hash." || echo "The files have different SHA256 hashes."'
+        input: ''
+        expected-output: The files have different SHA256 hashes.
+        comparison-method: exact
+        timeout: 10
+    - name: Classical Cryptanalysis Test Case 1
+      id: classical-cryptanalysis-test-case-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Classical Cryptanalysis Test Case 1
+        setup-command: ''
+        command: python3 vigenere.py
+        input: WCCNKANWOMAOJCKZNDIEFADTKWPGZLDDORSFEOWXOCJDTCXORZPMGKYGFROHDSCACTGBXQTJAIOYRDPMCXZDXZRVEYCLSEAZWYAYLAWPYFENGSEFWCMQBPLGCLGCDRZLNCMZKEZNRSCYLPAPNEFWWIVDWCKNEPOEFSEIJKOMNPRJOLPVHAUDSCDLSVKNRAYTJONMJCURDTMFZFQXPMXEHGRZLWDTJKYBKAETRLNKZFVRPJSDTQXPJWQTCLZYJOBW
+        expected-output: SLACKLY
+        comparison-method: exact
+        timeout: 10
+    - name: Classical Cryptanalysis Test Case 2
+      id: classical-cryptanalysis-test-case-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Classical Cryptanalysis Test Case 2
+        setup-command: ''
+        command: python3 vigenere.py
+        input: HFTHITCQETUDYUJDTFZSLPTHSUJHSJIQIGKFAOEHOGGGUDCWIPPLNPWULJXHSFFXCBVLOOKVNPVMUTVDBPWWADSXISKQGLPRWMGGGFKWITCIUOFDMFPWAMTLGIVDNECQETUHNUKDLUQRLGQUPFTVOOCOAOFVODKDLEGYEMQSMFPWATYHGSQZUQGGUDCWIPPVHBRHSPWUVBNXETVKOVIKTQTRCFUVETCQDVNWINCWEMARUSHXTVTHSCAHNBDOIOIXSUQFRJVLCBNWHJPNAOFXNEGUSUCQDDQPPMGACPPFEQVVEEWFAUKRNGQVTFTVAOGQVJTRNNGQTUJDTFPFOVTDGFULNOQYAUKRNBPGCSGDTJXLTZHXRUJHRNQUEJVKEMRVIODXIMFLNHEKASCFTFTGITELPMKQEBPGRFULLJGQCFGGUDCWIPPDLJPVTJVXTJQQSBTHAMURPMCWFPTPSGQUCVNWUSCOEYEKAOIHAMNRWJPJIOFLVJFXAMUIRPOGIWGUSFDDCLIUOVPGTPOHEUCQDMGDROHUONQQEBPRTIGUTIKVEYEKAOIHEOTLCIGVOVTVODKHTZCQDQTRMPVHSVPGESUWAOFLNHCPOOIGIGHHRFPWCPOPUOKWIFULNBFGIUKRNFFXCBVLOOKVCSWFIBNIOSGFOOQPIDFHVFNRPNGQTBERUOVUYXKWHBPHDVEDTFFZOSMIOSEHITDHTUGUPPULTJQQEEVRIOPRVBVHAOFFONRHTFKQTIGUEHKRNBPGGMQEEJPGIWKGUBNVWIQKAWGDCDGVSUQTUBNLTZGGUDCWIPPDRFORRFNLKFNBTPHLNEUWACNHENROOZOHNUCQDDQQTSKEUUGWOUJHEDQQONARVFTDLMGGUDCWIPPLSBRRWFTIUMFUIWGUOGEKAOIHIUKVNPVRNMADVJVDLQCUTPHRUSKQDJXLDVCOLJXHSCWWAMURALGBFBEWOSVKAUUKAQGVSPELEUKHSBPGNBVLOOUZEBNOHBXHAWKWAMTRLFVRPMCBIOUXPQQUTJPJAOFSRPORTJPJEEWFAUKRNGQUTIGEEUVHRNGQTPHRUSERMNWQIUKHSBPGOVTZOSNGFJPDLMAZEIQSEGWWUSGJEOGUAUKRNTYLLMJDVFCFCFUVTPGGUDCWIPPWHBVHNBDOETVKENVRADJLEWGWHFKUFVNOPPVHNUKDLBPGCSGDTFCERJIKTFTIUUWUEGQUAMN
+        expected-output: ABCD
+        comparison-method: exact
+        timeout: 10
+    - name: Padding Oracle Attack Test Case 1
+      id: padding-oracle-attack-test-case-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Padding Oracle Attack Test Case 1
+        setup-command: ''
+        command: python3 padding_oracle.py https://project1.ecen4133.org/prre9435/paddingoracle/verify
+          c1db1af41d0dd940bebf26068e0b6345cdc276c7856168ed28f06f462efcca5c190a929a13e028ae102d8329083283fb8e15adce9c4d0e08383f9607c49dfc6cf63eb02c80ada934fddb5fe5fee8e3ee3a12acdb5c70c4236666a58522d83fca
+        input: ''
+        expected-output: mess with the best, die like the rest.
+        comparison-method: exact
+        timeout: 45
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        LENGTH-EXTENSION-ATTACK-TEST-CASE-1_RESULTS: "${{steps.length-extension-attack-test-case-1.outputs.result}}"
+        LENGTH-EXTENSION-ATTACK-TEST-CASE-2_RESULTS: "${{steps.length-extension-attack-test-case-2.outputs.result}}"
+        HASH-COLLISION-ATTACK-TEST-CASE-1_RESULTS: "${{steps.hash-collision-attack-test-case-1.outputs.result}}"
+        HASH-COLLISION-ATTACK-TEST-CASE-2_RESULTS: "${{steps.hash-collision-attack-test-case-2.outputs.result}}"
+        HASH-COLLISION-ATTACK-TEST-CASE-3_RESULTS: "${{steps.hash-collision-attack-test-case-3.outputs.result}}"
+        HASH-COLLISION-ATTACK-TEST-CASE-4_RESULTS: "${{steps.hash-collision-attack-test-case-4.outputs.result}}"
+        CLASSICAL-CRYPTANALYSIS-TEST-CASE-1_RESULTS: "${{steps.classical-cryptanalysis-test-case-1.outputs.result}}"
+        CLASSICAL-CRYPTANALYSIS-TEST-CASE-2_RESULTS: "${{steps.classical-cryptanalysis-test-case-2.outputs.result}}"
+        PADDING-ORACLE-ATTACK-TEST-CASE-1_RESULTS: "${{steps.padding-oracle-attack-test-case-1.outputs.result}}"
+      with:
+        runners: length-extension-attack-test-case-1,length-extension-attack-test-case-2,hash-collision-attack-test-case-1,hash-collision-attack-test-case-2,hash-collision-attack-test-case-3,hash-collision-attack-test-case-4,classical-cryptanalysis-test-case-1,classical-cryptanalysis-test-case-2,padding-oracle-attack-test-case-1

@@ -1,0 +1,74 @@
+{
+  "tests": [
+    {
+      "name": "Sol0",
+      "setup": "make clean; sudo make",
+      "run": "python3 test/test.py ./ 0",
+      "input": "",
+      "output": "Full Credit",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 20
+    },
+    {
+      "name": "Sol1",
+      "setup": "",
+      "run": "python3 test/test.py ./ 1",
+      "input": "",
+      "output": "Full Credit",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 20
+    },
+    {
+      "name": "Sol2",
+      "setup": "",
+      "run": "python3 test/test.py ./ 2",
+      "input": "",
+      "output": "Full Credit",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 20
+    },
+    {
+      "name": "Sol3",
+      "setup": "",
+      "run": "python3 test/test.py ./ 3",
+      "input": "",
+      "output": "Full Credit",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 20
+    },
+    {
+      "name": "Sol4",
+      "setup": "",
+      "run": "python3 test/test.py ./ 4",
+      "input": "",
+      "output": "Full Credit",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 20
+    },
+    {
+      "name": "Sol5",
+      "setup": "",
+      "run": "python3 test/test.py ./ 5",
+      "input": "",
+      "output": "Full Credit",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 20
+    },
+    {
+      "name": "Sol6",
+      "setup": "",
+      "run": "python3 test/test.py ./ 6",
+      "input": "",
+      "output": "Full Credit",
+      "comparison": "included",
+      "timeout": 3,
+      "points": 20
+    }
+  ]
+}

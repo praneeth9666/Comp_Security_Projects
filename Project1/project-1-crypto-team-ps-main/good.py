@@ -1,0 +1,12 @@
+#!/usr/bin/python3
+# coding: latin-1
+blob = """
+
+AAAAAAAAAAAAAAAM#ç
+ĞÕ]â•m&P`8]°´}ü*b8Ë¦‘şäËÂ÷R–Ş	onÔ|¡51\f±Òkø\¹.ê•¬ôÑèòõ pÙO§qúõºçW«‰ğÇ/„'üNvï£ßO`/Áp ¸„kr—µk¹+—M	œ´=8Á@²öÅõdª"""
+from hashlib import sha256
+if 'E' not in blob :  # Even length for one file
+    print("Use SHA-256 instead!")
+else:  # Odd length for the other file
+    print("MD5 is perfectly secure!")
+
